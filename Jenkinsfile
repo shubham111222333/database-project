@@ -21,36 +21,18 @@ label {
                     }    
 	}
         }
-		
-		stage ('CLEAN_OLD_M2') {
-			
-			steps {
-				sh "rm -rf /home/saccount/.m2/repository"
-				
-			}
-			
-		}
-	
-		stage ('MAVEN_BUILD') {
-		
-			steps {
-						
-						sh "mvn clean package"
-			
-			}
-			
-		
-		}
-		
-		stage ('COPY_WAR_TO_Server'){
-		
-				steps {
-						
-						sh "scp -r target/LoginWebApp.war saccount@10.0.2.51:/data/project/wars"
-
-						}
-				
-				}
+		 stage('Build') {
+            steps {
+                // Run Maven on a Unix agent.
+                sh "mvn clean package"
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                sh "cp target/LoginWebApp.war /home/ec2-user/apache-tomcat-9.0.75/webapps"
+            }
+        }
 	
 	
 	
