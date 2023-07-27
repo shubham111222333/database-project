@@ -6,16 +6,21 @@ label {
 		
 		}
 		}
+		
+	stages {
+		stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
 
-	stage('SonarQubeScan') {
+		stage('SonarQubeScan') {
             steps {
 		    withSonarQubeEnv( 'sonarqube' ) {
                     sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=database -Dsonar.projectName='database'"
                     }    
 	}
         }
-		
-	stages {
 		
 		stage ('CLEAN_OLD_M2') {
 			
