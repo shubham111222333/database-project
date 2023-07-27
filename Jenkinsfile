@@ -17,7 +17,7 @@ label {
 		stage('SonarQubeScan') {
             steps {
 		    withSonarQubeEnv( 'sonarqube' ) {
-                    sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=database -Dsonar.projectName='database'"
+                    sh "/home/ec2-user/apache-maven-3.8.6/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=database -Dsonar.projectName='database'"
                     }    
 	}
         }
