@@ -1,11 +1,5 @@
 pipeline {
-agent {
-label {
-		label "built-in"
-		customWorkspace "/data/project-myapp"
-		
-		}
-		}
+agent any
 		
 	stages {
 		stage('SCM') {
