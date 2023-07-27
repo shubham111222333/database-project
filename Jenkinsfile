@@ -6,6 +6,14 @@ label {
 		
 		}
 		}
+
+	stage('SonarQubeScan') {
+            steps {
+		    withSonarQubeEnv( 'sonarqube' ) {
+                    sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=database -Dsonar.projectName='database'"
+                    }    
+	}
+        }
 		
 	stages {
 		
